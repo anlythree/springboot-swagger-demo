@@ -10,10 +10,9 @@ import java.time.LocalDateTime;
 
 @Api(tags = "swagger的getDemoStr测试")
 @RestController
-@RequestMapping("/demoController")
 public class DemoController {
 
-    @GetMapping("/getDemoStr")
+    @GetMapping("/get")
     @ApiOperation("getDemoStr")
     public String getDemoStr() {
         String demoStr = "demoStr:controller链接成功。当前时间：" + LocalDateTime.now();
