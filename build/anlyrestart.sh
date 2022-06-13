@@ -45,13 +45,13 @@ cd ${CURRENT_PATH}
 mvn clean package -Dmaven.test.skip=true
 ##复制jar包至服务器
 
-/usr/bin/expect <<EOF
+/usr/bin/expect << EOF
   ##scp复制时把文件名修改为带日期格式的
   spawn scp -r -P 233 "${CURRENT_JAR_PATH}${JAR_NAME}" anlyconnect@43.132.237.240:${SERVER_JAR_PATH}${JAR_NAME}${CURRENT_TIME}
   ##输入密码
   expect "*password"
   send "Anly233\r"
-  interact
+  expect eof
 EOF
 
 #
@@ -63,7 +63,6 @@ EOF
 echo "endOf本地处理（1、删除原maven打包目录，2、运行maven命令重新打包，3、解压tar包来生成新jar包，4、复制新jar包至服务器并重命名后带当前时间）"
 ##endOf本地处理（1、删除原maven打包目录，2、运行maven命令重新打包，3、解压tar包来生成新jar包，4、复制新jar包至服务器并重命名后带当前时间）
 
-}
 ##startOf连接服务器（5、把旧jar包进程杀死，6、把旧jar包名字后加上时间，7、重命名新jar包并启动）
 #echo "startOf连接服务器（5、把旧jar包进程杀死，5、把旧jar包名字后加上时间，7、重命名新jar包并启动）"
 #/usr/bin/expect <<EOF
