@@ -74,7 +74,7 @@ public class DocUtil {
         }
         String objPath = Objects.requireNonNull(clazz.getResource("/")).getPath();
         String classPath = StringUtils.replace(clazz.getName(), ".", "/");
-        return objPath.substring(0,objPath.indexOf("/target"))+path+classPath;
+        return objPath.substring(0,objPath.indexOf("/target"))+path+classPath+".java";
     }
 
     @Test
