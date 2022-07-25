@@ -65,6 +65,7 @@ public class DocUtil {
 
     /**
      * 根据class获取java文件绝对路径
+     * @param path 项目内部地址
      * @param clazz
      * @return
      */
