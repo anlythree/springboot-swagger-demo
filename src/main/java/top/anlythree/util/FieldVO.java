@@ -19,7 +19,7 @@ public class FieldVO {
     /**
      * 属性类型
      */
-    private String fieldType;
+    private Class<?> fieldType;
 
     /**
      * 属性注释
@@ -27,13 +27,19 @@ public class FieldVO {
     private String describe;
 
     /**
-     * 该属性对应的类的Doc信息
+     * 是否为列表
      */
-    private List<FieldVO> fieldVOList;
+    private Boolean isList;
 
-    public FieldVO(String fieldName, String fieldType, String describe) {
+    /**
+     * 叶子属性列表
+     */
+    private List<FieldVO> leafField;
+
+    public FieldVO(String fieldName, Class<?> fieldType, String describe) {
         this.fieldName = fieldName;
         this.fieldType = fieldType;
         this.describe = describe;
+        this.isList = false;
     }
 }
