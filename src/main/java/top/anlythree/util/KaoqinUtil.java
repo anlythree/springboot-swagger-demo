@@ -47,7 +47,10 @@ public class KaoqinUtil {
         System.out.println("转换成考勤数据开始");
         List<KaoqinMo> kaoqinMos = convertDakaToKaoqin(allDakaDataByYearAndMonthAndName);
         System.out.println("转换成考勤数据结束");
-        PoiUtil.defaultExport(workBook,"22-" + monthNum, kaoqinMos);
+        for (KaoqinMo kaoqinMo : kaoqinMos) {
+            System.out.println(kaoqinMo);
+        }
+//        PoiUtil.defaultExport(workBook,"22-" + monthNum, kaoqinMos);
     }
 
     public static List<KaoqinMo> convertDakaToKaoqin(List<DakaMo> dakaMoList){

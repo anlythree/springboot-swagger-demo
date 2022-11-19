@@ -39,14 +39,13 @@ public class AnlyTest {
     @Test
     public void test2() throws Exception{
         // 开始前修改文件名
-        HSSFWorkbook workBook = PoiUtil.getWorkBook("/Users/anlythree/Documents/kaoqin"+ LocalDateTime.now() +".xlsx");
-        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "04", "王力");
+//        HSSFWorkbook workBook = PoiUtil.getWorkBook("/Users/anlythree/Documents/kaoqin"+ LocalDateTime.now() +".xlsx");
+        KaoqinUtil.createDefaultDataByYearAndMonthAndName(null,"2022", "11", "王天聪");
 //        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "05", "王力");
 //        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "08", "王力");
 //        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "09", "王力");
 //        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "10", "王力");
 //        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "11", "王力");
-
 
         // 输出到文件
 //        PoiUtil.updateFile("/Users/anlythree/Documents/wangli-kaoqin2.xlsx",workBook);
@@ -54,7 +53,7 @@ public class AnlyTest {
 
     @Test
     public void test3() throws Exception{
-        List<JiaBanMo> wangliJiaban = KaoqinUtil.getAllJiabanDataByYearAndMonthAndName("2022", "05", "牛峰");
+        List<JiaBanMo> wangliJiaban = KaoqinUtil.getAllJiabanDataByYearAndMonthAndName("2022", "11", "王天聪");
         for (JiaBanMo jiaBanMo : wangliJiaban) {
             System.out.println(jiaBanMo.getBeizhu());
 //            System.out.println(jiaBanMo.getName()+":"+jiaBanMo.getBenzhougongzuoneirong());
@@ -64,7 +63,7 @@ public class AnlyTest {
 
     @Test
     public void test4() throws Exception{
-        List<ZhuomoJiaBan> zhoumoJiabanList = KaoqinUtil.getAllZhoumoJiabanDataByYearAndMonthAndName("2022", "05", "");
+        List<ZhuomoJiaBan> zhoumoJiabanList = KaoqinUtil.getAllZhoumoJiabanDataByYearAndMonthAndName("2022", "11", "王天聪");
         for (ZhuomoJiaBan zhoumoJiaBan : zhoumoJiabanList) {
             System.out.println(zhoumoJiaBan.getName()+zhoumoJiaBan.getJiabanneirong());
         }
