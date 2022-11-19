@@ -7,6 +7,7 @@ import top.anlythree.util.mo.JiaBanMo;
 import top.anlythree.util.mo.KaoqinMo;
 import top.anlythree.util.mo.ZhuomoJiaBan;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -37,8 +38,9 @@ public class AnlyTest {
     ////// !!!!!!!!!!!!!!!!!!会替换文件内容！！！！！！！！！！！！！！！！！！！
     @Test
     public void test2() throws Exception{
-        HSSFWorkbook workBook = PoiUtil.getWorkBook("/Users/anlythree/Documents/wangli-kaoqin.xlsx");
-        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "09", "牛峰");
+        // 开始前修改文件名
+        HSSFWorkbook workBook = PoiUtil.getWorkBook("/Users/anlythree/Documents/kaoqin"+ LocalDateTime.now() +".xlsx");
+        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "04", "王力");
 //        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "05", "王力");
 //        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "08", "王力");
 //        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "09", "王力");
@@ -49,9 +51,10 @@ public class AnlyTest {
 
     @Test
     public void test3() throws Exception{
-        List<JiaBanMo> wangliJiaban = KaoqinUtil.getAllJiabanDataByYearAndMonthAndName("2022", "09", "牛峰");
+        List<JiaBanMo> wangliJiaban = KaoqinUtil.getAllJiabanDataByYearAndMonthAndName("2022", "05", "牛峰");
         for (JiaBanMo jiaBanMo : wangliJiaban) {
-            System.out.println(jiaBanMo);
+            System.out.println(jiaBanMo.getBeizhu());
+//            System.out.println(jiaBanMo.getName()+":"+jiaBanMo.getBenzhougongzuoneirong());
         }
 
     }
