@@ -46,7 +46,10 @@ public class AnlyTest {
 //        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "09", "王力");
 //        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "10", "王力");
 //        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "11", "王力");
-        PoiUtil.updateFile("/Users/anlythree/Documents/wangli-kaoqin2.xlsx",workBook);
+
+
+        // 输出到文件
+//        PoiUtil.updateFile("/Users/anlythree/Documents/wangli-kaoqin2.xlsx",workBook);
     }
 
     @Test
