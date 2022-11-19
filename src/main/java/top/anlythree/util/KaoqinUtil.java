@@ -1,8 +1,11 @@
 package top.anlythree.util;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.thymeleaf.util.StringUtils;
 import top.anlythree.util.mo.DakaMo;
+import top.anlythree.util.mo.JiaBanMo;
 import top.anlythree.util.mo.KaoqinMo;
+import top.anlythree.util.mo.ZhuomoJiaBan;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -111,16 +114,17 @@ public class KaoqinUtil {
         }
         return filePathList;
     }
-
-    public static List<DakaMo> getAllJiabanDataByYearAndMonthAndName(String yearNum, String monthNum, String name) throws Exception{
+//////////////////////////////////////// startOf 加班
+    public static List<JiaBanMo> getAllJiabanDataByYearAndMonthAndName(String yearNum, String monthNum, String name) throws Exception{
         System.out.println("获取所有【"+name+"在"+yearNum+monthNum+"】的加班信息中……");
-        List<DakaMo> allData = new ArrayList<>();
-        List<String> fileByYearAndMonth = getDakaFileByYearAndMonth(jiabanBaseLocation, yearNum, monthNum);
+        List<JiaBanMo> allData = new ArrayList<>();
+        List<String> fileByYearAndMonth = getJiaBanFileByYearAndMonth(jiabanBaseLocation, yearNum, monthNum);
         for (String filePath : fileByYearAndMonth) {
-            List<DakaMo> dakaMoList = PoiUtil.defaultImportReturnObj(filePath, new DakaMo().getColumNameList(), DakaMo.class);
-            for (DakaMo dakaMo : dakaMoList) {
-                if(dakaMo.getName().contains(name)){
-                    allData.add(dakaMo);
+            List<JiaBanMo> dakaMoList = PoiUtil.defaultImportReturnObj(filePath, new JiaBanMo().getColumNameList(), JiaBanMo.class);
+            for (JiaBanMo jiaban : dakaMoList) {
+                if(!StringUtils.isEmpty(jiaban.getName()) && jiaban.getName().contains(name) &&
+                        ("0.000".equals(jiaban.getGongzuorijiabangongshi()) || "0".equals(jiaban.getGongzuorijiabangongshi())|| !StringUtils.isEmpty(jiaban.getBeizhu()) ) ){
+                    allData.add(jiaban);
                 }
             }
         }
@@ -141,7 +145,7 @@ public class KaoqinUtil {
         getFile(file,fileMap);
         for (String filePath : fileMap.keySet()) {
             String fileName = fileMap.get(filePath);
-            if(fileName.contains(yearNum+monthNum)){
+            if(fileName.contains(yearNum+monthNum) && fileName.contains("绿点")&& fileName.contains(".xlsx") && !fileName.contains("~$")){
                 filePathList.add(filePath);
             }
         }
@@ -149,7 +153,48 @@ public class KaoqinUtil {
     }
 
 
+//////////////////////////////////////// endOf 加班
 
+
+//////////////////////////////////////// startOf 周末加班
+    public static List<ZhuomoJiaBan> getAllZhoumoJiabanDataByYearAndMonthAndName(String yearNum, String monthNum, String name) throws Exception{
+        System.out.println("获取所有【"+name+"在"+yearNum+monthNum+"】的加班信息中……");
+        List<ZhuomoJiaBan> allData = new ArrayList<>();
+        List<String> fileByYearAndMonth = getZhoumoJiaBanFileByYearAndMonth(jiabanBaseLocation, yearNum, monthNum);
+        for (String filePath : fileByYearAndMonth) {
+            List<ZhuomoJiaBan> zhuomoJiaBanList = PoiUtil.defaultImportReturnObj(filePath, new ZhuomoJiaBan().getColumNameList(), ZhuomoJiaBan.class);
+            for (ZhuomoJiaBan zhoumojiaban : zhuomoJiaBanList) {
+                if(!StringUtils.isEmpty(zhoumojiaban.getName()) && zhoumojiaban.getName().contains(name)){
+                    allData.add(zhoumojiaban);
+                }
+            }
+        }
+        System.out.println("获取所有【"+name+"在"+yearNum+monthNum+"】的加班信息中……");
+        return allData;
+    }
+
+    /**
+     *  根据文件夹位置，年月获取符合条件的excel文件路径
+     * @param yearNum
+     * @param monthNum
+     * @return
+     */
+    public static List<String> getZhoumoJiaBanFileByYearAndMonth(String dirPath, String yearNum, String monthNum){
+        List<String> filePathList = new ArrayList<>();
+        HashMap<String, String> fileMap = new HashMap<>();
+        File file = new File(dirPath);
+        getFile(file,fileMap);
+        for (String filePath : fileMap.keySet()) {
+            String fileName = fileMap.get(filePath);
+            if(fileName.contains(yearNum+monthNum) && fileName.contains("加班工作量信息导入")&& fileName.contains(".xlsx") && !fileName.contains("~$")){
+                filePathList.add(filePath);
+            }
+        }
+        return filePathList;
+    }
+
+
+//////////////////////////////////////// endOf 周末加班
 
 
     public static void getFile (File file, HashMap<String,String> map){

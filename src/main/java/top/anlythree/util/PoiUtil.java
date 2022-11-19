@@ -95,12 +95,17 @@ public class PoiUtil {
             int totalRowNum = sheet.getLastRowNum();
 
             // 获得表头
+            Integer startNum = 0;
+            if(filePath.contains("_原始记录表_")){
+                startNum = 2;
+            }
             // todo-anlythree 从哪一行开始读取表头信息
-            Row rowHead = sheet.getRow(2);
-            // 获得表头总列数
+            Row rowHead = sheet.getRow(startNum);
+            // 获得表头总列数9
             int cols = rowHead.getPhysicalNumberOfCells();
 
             if (keys.length != cols) {
+                System.out.println("！！！！！！！！！！！！！！！！！！！！"+filePath+"第"+rowHead.getRowNum()+"行未扫描！！！！！！！！！！！！！！！！！！！！！");
                 throw new Exception("传入的key数组长度与表头长度不一致!");
             }
             Row row = null;
@@ -135,7 +140,8 @@ public class PoiUtil {
                     } else if (Cell.CELL_TYPE_BLANK == cell.getCellType()) {
                         value = cell.getDateCellValue();
                     } else {
-                        throw new Exception("At row: %s, col: %s, can not discriminate type!");
+                        // todo-anlythree 之后放开
+//                        throw new Exception("At row: %s, col: %s, can not discriminate type!");
                     }
 
                     map.put(keys[j], value);

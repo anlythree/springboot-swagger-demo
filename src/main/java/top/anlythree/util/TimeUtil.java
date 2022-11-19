@@ -23,7 +23,9 @@ public class TimeUtil {
      */
     private final static DateTimeFormatter FMT_DATE_TIME2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    private final static DateTimeFormatter FMT_DATE_TIME = DateTimeFormatter.ofPattern("yy-MM-dd HH:mm:ss");
+    private final static DateTimeFormatter FMT_DATE_TIME = DateTimeFormatter.ofPattern("yy-MM-dd HH:mm");
+
+    private final static DateTimeFormatter FMT_DATE_TIME4 = DateTimeFormatter.ofPattern("yy-MM-dd HH:mm:ss");
 
     private final static DateTimeFormatter FMT_DATE_TIME3 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
@@ -68,7 +70,11 @@ public class TimeUtil {
             try {
                 return LocalDateTime.parse(localDateTime,FMT_DATE_TIME2);
             }catch (DateTimeParseException e1){
-                return LocalDateTime.parse(localDateTime,FMT_DATE_TIME3);
+                try {
+                    return LocalDateTime.parse(localDateTime,FMT_DATE_TIME3);
+                }catch (DateTimeParseException e2){
+                    return LocalDateTime.parse(localDateTime,FMT_DATE_TIME4);
+                }
             }
         }
     }

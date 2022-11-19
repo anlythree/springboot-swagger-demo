@@ -3,7 +3,9 @@ import org.junit.Test;
 import top.anlythree.util.KaoqinUtil;
 import top.anlythree.util.PoiUtil;
 import top.anlythree.util.mo.DakaMo;
+import top.anlythree.util.mo.JiaBanMo;
 import top.anlythree.util.mo.KaoqinMo;
+import top.anlythree.util.mo.ZhuomoJiaBan;
 
 import java.util.List;
 import java.util.Map;
@@ -32,16 +34,35 @@ public class AnlyTest {
 
     }
 
+    ////// !!!!!!!!!!!!!!!!!!会替换文件内容！！！！！！！！！！！！！！！！！！！
     @Test
     public void test2() throws Exception{
         HSSFWorkbook workBook = PoiUtil.getWorkBook("/Users/anlythree/Documents/wangli-kaoqin.xlsx");
-        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "06", "王力");
-        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "07", "王力");
-        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "08", "王力");
-        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "09", "王力");
-        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "10", "王力");
-        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "11", "王力");
-        PoiUtil.updateFile("/Users/anlythree/Documents/wangli-kaoqin.xlsx",workBook);
+        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "09", "牛峰");
+//        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "05", "王力");
+//        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "08", "王力");
+//        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "09", "王力");
+//        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "10", "王力");
+//        KaoqinUtil.createDefaultDataByYearAndMonthAndName(workBook,"2022", "11", "王力");
+        PoiUtil.updateFile("/Users/anlythree/Documents/wangli-kaoqin2.xlsx",workBook);
+    }
+
+    @Test
+    public void test3() throws Exception{
+        List<JiaBanMo> wangliJiaban = KaoqinUtil.getAllJiabanDataByYearAndMonthAndName("2022", "09", "牛峰");
+        for (JiaBanMo jiaBanMo : wangliJiaban) {
+            System.out.println(jiaBanMo);
+        }
+
+    }
+
+    @Test
+    public void test4() throws Exception{
+        List<ZhuomoJiaBan> zhoumoJiabanList = KaoqinUtil.getAllZhoumoJiabanDataByYearAndMonthAndName("2022", "05", "");
+        for (ZhuomoJiaBan zhoumoJiaBan : zhoumoJiabanList) {
+            System.out.println(zhoumoJiaBan.getName()+zhoumoJiaBan.getJiabanneirong());
+        }
+
     }
 
 }

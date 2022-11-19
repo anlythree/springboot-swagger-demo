@@ -35,4 +35,6 @@ public class JiaBanMo {
     @ExcelColumn(title = "备注",fieldNames = "beizhu")
     private String beizhu;
 
+    private String[] columNameList = {"name","zhanghao","phone","benzhougongzuoneirong","zhengchanggongshi","gongzuorijiabangongshi","beizhu"};
+
 }
