@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-swagger-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot-swagger-demo
+  template:
+    metadata:
+      labels:
+        app: springboot-swagger-demo
+    spec:
+      containers:
+        - name: springboot-swagger-demo
+          image: 43.132.185.144:8005/myproject/springboot-swagger-demo:1.0
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+  imagePullSecrets:
+    - name: harbor-secret
